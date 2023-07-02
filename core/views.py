@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Inmueble, FotoInmueble, Cliente, CorredoraPropiedad
+from .models import Inmueble, FotoInmueble, Cliente, CorredoraPropiedad, Region, Ciudad, Comuna
+
+
 
 # Create your views here.
 
@@ -118,4 +120,36 @@ def detalle_depto(request, inmueble_id):
         return HttpResponse("El inmueble no es un departamento")
 
 
-#127.0.0.1:8000/ 
+
+
+
+
+def registro_usuario(request):
+    if request.method == 'POST':
+        # Obtener los datos del formulario
+        rut_cli = request.POST['rut_cli']
+        dv_cli = request.POST['dv_cli']
+        nombre_cli = request.POST['nombre_cli']
+        apat_cli = request.POST['apat_cli']
+        amat_cli = request.POST['amat_cli']
+        dir_cli = request.POST['dir_cli']
+        fecha_nac_cli = request.POST['fecha_nac_cli']
+        email_cli = request.POST['correo']
+        celular_cli = request.POST['telefono']
+        contrasena_cli = request.POST['password']
+        estado_suscripcion_cli = 'I'  # Valor predeterminado
+        id_com = request.POST['id_com']
+        
+
+        # Crear un nuevo cliente
+        cliente = Cliente(rut_cli=rut_cli, dv_cli=dv_cli, nombre_cli=nombre_cli, apat_cli=apat_cli,
+                          amat_cli=amat_cli, dir_cli=dir_cli, fecha_nac_cli=fecha_nac_cli, email_cli=email_cli,
+                          celular_cli=celular_cli, contrasena_cli=contrasena_cli,
+                          estado_suscripcion_cli=estado_suscripcion_cli, id_com_id=id_com)
+        cliente.save()
+
+        # Redireccionar a una página de éxito o a donde desees después del registro
+        return redirect('registro_exitoso')
+
+    # Si el método es GET, renderiza el formulario vacío
+    return render(request, 'registro.html')

@@ -11,10 +11,10 @@ class Ciudad(models.Model):
     id_region = models.ForeignKey('Region', on_delete=models.CASCADE, db_column='ID_REGION')
 
 class Comuna(models.Model):
-    id_com = models.IntegerField(primary_key=True)
+    id_com = models.AutoField(primary_key=True)
     nom_com = models.CharField(max_length=100)
     id_ciudad = models.ForeignKey('Ciudad', on_delete=models.CASCADE, db_column='ID_CIUDAD')
-    id_region = models.ForeignKey('Region', on_delete=models.CASCADE, db_column='ID_REGION')
+    
 
     def __str__(self):
         return self.nom_com
@@ -35,9 +35,7 @@ class Cliente(models.Model):
     contrasena_cli = models.CharField(max_length=6)
     estado_suscripcion_cli = models.CharField(max_length=1, default='I')
     id_com = models.ForeignKey('Comuna', on_delete=models.CASCADE, db_column='ID_COM')
-    id_ciudad = models.ForeignKey('Ciudad', on_delete=models.CASCADE, db_column='ID_CIUDAD')
-    id_region = models.ForeignKey('Region', on_delete=models.CASCADE, db_column='ID_REGION')
-    id_suscr = models.ForeignKey('Suscripcion', on_delete=models.CASCADE, db_column='ID_SUSCR')
+    
 
     def __str__(self):
         return self.nombre_cli
@@ -56,8 +54,6 @@ class CorredoraPropiedad(models.Model):
     sitio_web_corr = models.CharField(max_length=100, null=True, blank=True)
     estado_suscripcion_corr = models.CharField(max_length=1, default='I')
     id_com = models.ForeignKey('Comuna', on_delete=models.CASCADE)
-    id_ciudad = models.ForeignKey('Ciudad', on_delete=models.CASCADE)
-    id_region = models.ForeignKey('Region', on_delete=models.CASCADE)
     id_suscr = models.ForeignKey('Suscripcion', on_delete=models.CASCADE)
 
     def __str__(self):
