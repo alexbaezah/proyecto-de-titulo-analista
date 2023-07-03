@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 class Region(models.Model):
     id_region = models.IntegerField(primary_key=True)
@@ -35,6 +36,7 @@ class Cliente(models.Model):
     contrasena_cli = models.CharField(max_length=6)
     estado_suscripcion_cli = models.CharField(max_length=1, default='I')
     comuna_cli = models.CharField(max_length=100)
+    
 
     class Meta:
         db_table = 'CLIENTE'
@@ -166,3 +168,6 @@ class Publicacion(models.Model):
 
     class Meta:
         db_table = 'PUBLICACION'
+
+
+#usuario auth

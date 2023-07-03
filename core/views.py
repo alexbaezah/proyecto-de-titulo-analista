@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Inmueble, FotoInmueble, Cliente, CorredoraPropiedad, Region, Ciudad, Comuna
+from .models import Inmueble, FotoInmueble, Cliente
+from django.contrib import messages
+
 
 
 
@@ -154,3 +156,26 @@ def registro_usuario(request):
 
     # Si el método es GET, renderiza el formulario vacío
     return render(request, 'core/registro.html', {'comunas': comunas})
+
+
+def login_view(request):
+    if request.method == 'POST':
+        email = request.POST['usuario']
+        password = request.POST['password']
+        
+        # Realizar la búsqueda en la base de datos para verificar las credenciales
+        try:
+            cliente = Cliente.objects.get(email_cli=email, contrasena_cli=password)
+        except Cliente.DoesNotExist:
+            cliente = None
+        
+        if cliente is not None:
+            # Usuario autenticado, mostrar mensaje o realizar alguna acción
+            messages.success(request, 'Usuario autenticado')
+            return render(request, 'core/login.html')
+        else:
+            # Usuario no autenticado, mostrar mensaje de error
+            messages.error(request, 'Credenciales incorrectas')
+            return render(request, 'core/login.html')
+    else:
+        return render(request, 'core/login.html')

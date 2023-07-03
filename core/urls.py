@@ -1,8 +1,10 @@
 from django.urls import path
-from core.views import home, page_casas, detalle_casa, page_deptos, detalle_depto, registro_usuario
+from core.views import home, page_casas, detalle_casa, page_deptos, detalle_depto, registro_usuario, login_view
 from django.shortcuts import render
 from django.conf import settings 
 from django.conf.urls.static import static
+
+
 
 urlpatterns = [
     path('', home, name='home'),
@@ -16,5 +18,8 @@ urlpatterns = [
     path('pageNosotros.html', lambda request: render(request, 'core/pageNosotros.html'), name='page_nosotros'),
     path('detalleCasa/<int:inmueble_id>/', detalle_casa, name='detalle_casa'),
     path('detalleDepartamento/<int:inmueble_id>/', detalle_depto, name='detalle_depto'),
+
+    path('login/', login_view, name='login'),
+   
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
