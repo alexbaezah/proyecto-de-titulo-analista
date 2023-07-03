@@ -122,11 +122,12 @@ class Inmueble(models.Model):
     precio_inmb = models.IntegerField()
     rut_cli = models.ForeignKey('Cliente', on_delete=models.CASCADE, db_column='RUT_CLI')
     rut_corr = models.ForeignKey('CorredoraPropiedad', on_delete=models.CASCADE, db_column='RUT_CORR')
-    id_com = models.ForeignKey('Comuna', on_delete=models.CASCADE, db_column='ID_COM')
-    id_ciudad = models.ForeignKey('Ciudad', on_delete=models.CASCADE, db_column='ID_CIUDAD')
-    id_region = models.ForeignKey('Region', on_delete=models.CASCADE, db_column='ID_REGION')
-    id_tipo_inmb = models.ForeignKey('TipoInmueble', on_delete=models.CASCADE, db_column='ID_TIPO_INMB')
-    cod_estado_inmb = models.ForeignKey('EstadoInmueble', on_delete=models.CASCADE, db_column = 'COD_ESTADO_INMB')
+    comuna_inmb = models.CharField(max_length=100)
+    ciudad_inmb = models.CharField(max_length=100)
+    region_inmb = models.CharField(max_length=100)
+    tipo_inmueble = models.CharField(max_length=50)
+    estado_inmueble = models.CharField(max_length=50)
+    
 
     def __str__(self):
         return f"Inmueble {self.id_inmb}"

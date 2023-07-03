@@ -2,39 +2,29 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Inmueble, FotoInmueble, Cliente
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.views.generic import ListView
 
 
 
 
 # Create your views here.
 
-
-
 def home(request):
-    departamentos = Inmueble.objects.filter(id_tipo_inmb=2)[:8]  # Filtrar y obtener máximo 8 departamentos
-    casas = Inmueble.objects.filter(id_tipo_inmb=1)[:8]  # Filtrar y obtener máximo 8 casas
-    listaColor = ['negro','gris azulado','3 leche']
-    context = { "nombre": "Connito", "listaColor": listaColor, 
-                'departamentos': departamentos, 
-                'casas': casas,               
-               }
-    
-    return render(request, 'core/home.html', context)
+    inmuebles = Inmueble.objects.all()
 
-    
-
-
-def page_departamentos(request):
-    departamentos = Inmueble.objects.filter(id_tipo_inmb=2)  # Filtrar los departamentos (id_tipo_inmb=2)
+    casas = Inmueble.objects.filter(tipo_inmueble="Casa")
+    departamentos = Inmueble.objects.filter(tipo_inmueble="Departamento")
 
     context = {
-        'departamentos': departamentos
+        "nombre": "Connito",
+        "casas": casas,
+        "departamentos": departamentos,
     }
+    print(casas)
+    print(departamentos)
+    return render(request, 'core/home.html', context)
 
-    return render(request, 'core/pageDepartamento.html', context)
 
-# acá está lo relacioando a casas
 
 
 def page_casas(request):
