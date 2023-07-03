@@ -20,6 +20,9 @@ urlpatterns = [
     path('detalleDepartamento/<int:inmueble_id>/', detalle_depto, name='detalle_depto'),
 
     path('login/', login_view, name='login'),
+
+
+    
    
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

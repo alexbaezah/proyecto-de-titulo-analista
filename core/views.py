@@ -2,11 +2,14 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Inmueble, FotoInmueble, Cliente
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
 
 
 
 
 # Create your views here.
+
+
 
 def home(request):
     departamentos = Inmueble.objects.filter(id_tipo_inmb=2)[:8]  # Filtrar y obtener máximo 8 departamentos
@@ -158,6 +161,21 @@ def registro_usuario(request):
     return render(request, 'core/registro.html', {'comunas': comunas})
 
 
+def open_session(request, email):
+    # Verificar si el usuario ya tiene una sesión abierta
+    if 'session_email' in request.session:
+        # Si ya existe una sesión abierta, cerrarla antes de abrir una nueva
+        close_session(request)
+    
+    # Establecer el correo electrónico del usuario en la sesión
+    request.session['session_email'] = email
+
+def close_session(request):
+    # Eliminar el correo electrónico de la sesión
+    if 'session_email' in request.session:
+        del request.session['session_email']
+
+
 def login_view(request):
     if request.method == 'POST':
         email = request.POST['usuario']
@@ -170,7 +188,8 @@ def login_view(request):
             cliente = None
         
         if cliente is not None:
-            # Usuario autenticado, mostrar mensaje o realizar alguna acción
+            # Usuario autenticado, abrir sesión
+            open_session(request, email)
             messages.success(request, 'Usuario autenticado')
             return render(request, 'core/login.html')
         else:

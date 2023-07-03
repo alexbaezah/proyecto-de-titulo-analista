@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'localhost:1521/XE',  # Nombre del host y el SID de Oracle
         'USER': 'INMOBILIARIA',
         'PASSWORD': '1234',
-        'CONN_MAX_AGE': 600,  # Tiempo de vida de la conexión en segundos (opcional)
+        
     }
 }
 
@@ -135,4 +135,9 @@ AUTHENTICATION_BACKENDS = [
     
 ]
 
+# Define la ruta a la vista de inicio de sesión
+LOGIN_URL = '/login/'
 
+
+# Define la ruta a la vista de redirección después de iniciar sesión
+LOGIN_REDIRECT_URL = '/home/'

@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+
 
 class Region(models.Model):
     id_region = models.IntegerField(primary_key=True)
@@ -40,6 +40,10 @@ class Cliente(models.Model):
 
     class Meta:
         db_table = 'CLIENTE'
+
+
+
+
 
 
 class CorredoraPropiedad(models.Model):
