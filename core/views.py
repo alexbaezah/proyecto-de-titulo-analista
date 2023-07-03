@@ -121,9 +121,6 @@ def detalle_depto(request, inmueble_id):
 
 
 
-
-
-
 def registro_usuario(request):
     if request.method == 'POST':
         # Obtener los datos del formulario
@@ -134,22 +131,26 @@ def registro_usuario(request):
         amat_cli = request.POST['amat_cli']
         dir_cli = request.POST['dir_cli']
         fecha_nac_cli = request.POST['fecha_nac_cli']
-        email_cli = request.POST['correo']
-        celular_cli = request.POST['telefono']
+        email_cli = request.POST['email_cli']
+        celular_cli = request.POST['celular_cli']
         contrasena_cli = request.POST['password']
         estado_suscripcion_cli = 'I'  # Valor predeterminado
-        id_com = request.POST['id_com']
+        comuna_cli = request.POST['nombre_comuna']
         
 
         # Crear un nuevo cliente
         cliente = Cliente(rut_cli=rut_cli, dv_cli=dv_cli, nombre_cli=nombre_cli, apat_cli=apat_cli,
                           amat_cli=amat_cli, dir_cli=dir_cli, fecha_nac_cli=fecha_nac_cli, email_cli=email_cli,
                           celular_cli=celular_cli, contrasena_cli=contrasena_cli,
-                          estado_suscripcion_cli=estado_suscripcion_cli, id_com_id=id_com)
+                          estado_suscripcion_cli=estado_suscripcion_cli, comuna_cli=comuna_cli)
         cliente.save()
 
         # Redireccionar a una página de éxito o a donde desees después del registro
         return redirect('registro_exitoso')
+    else:
+        comunas = [    (1, 'Las Condes'),    (2, 'Providencia'),    (3, 'Santiago'),    (4, 'Ñuñoa'),    (5, 'Vitacura'),    (6, 'La Reina'),    (7, 'La Florida'),    (8, 'Maipú'),    (9, 'Lo Barnechea'),    (10, 'Macul'),    (11, 'San Miguel'),    (12, 'Peñalolén'),    (13, 'Puente Alto'),    (14, 'Recoleta'),    (15, 'Estación Central'),    (16, 'San Bernardo'),    (17, 'Independencia'),    (18, 'La Cisterna'),    (19, 'Quilicura'),    (20, 'Quinta Normal'),    (21, 'Conchalí'),    (22, 'San Joaquín'),    (23, 'Huechuraba'),    (24, 'El Bosque'),    (25, 'Cerrillos'),    (26, 'Cerro Navia'),    (27, 'La Granja'),    (28, 'La Pintana'),    (29, 'Lo Espejo'),    (30, 'Lo Prado'),    (31, 'Pedro Aguirre Cerda'),    (32, 'Pudahuel'),    (33, 'Renca'),    (34, 'San Ramón'),    (35, 'Melipilla'),    (36, 'San Pedro'),    (37, 'Alhué'),    (38, 'María Pinto'),    (39, 'Curacaví'),    (40, 'Talagante'),    (41, 'El Monte'),    (42, 'Paine'),    (43, 'Peñaflor'),    (44, 'Isla de Maipo'),    (45, 'Colina'),    (46, 'Pirque')]
+
+
 
     # Si el método es GET, renderiza el formulario vacío
-    return render(request, 'registro.html')
+    return render(request, 'core/registro.html', {'comunas': comunas})

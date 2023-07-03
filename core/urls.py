@@ -11,7 +11,7 @@ urlpatterns = [
     path('pageContacto.html', lambda request: render(request, 'core/pageContacto.html'), name='page_ccontacto'),
     path('home.html', lambda request: render(request, 'core/home.html'), name='page_home'),
     path('registro/', registro_usuario, name='registro_usuario'),
-           
+    path('pagina_exito.html', lambda request: render(request, 'core/pagina_exito.html'), name='pagina_exito'),       
     path('iniciarSesion.html', lambda request: render(request, 'core/IniciarSesion.html'), name='page_iniciarSesion'),
     path('pageNosotros.html', lambda request: render(request, 'core/pageNosotros.html'), name='page_nosotros'),
     path('detalleCasa/<int:inmueble_id>/', detalle_casa, name='detalle_casa'),

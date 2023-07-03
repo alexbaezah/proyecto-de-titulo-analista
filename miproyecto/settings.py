@@ -129,3 +129,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+COMUNAS = [    (1, 'Las Condes'),    (2, 'Providencia'),    (3, 'Santiago'),    (4, 'Ñuñoa'),    (5, 'Vitacura'),    (6, 'La Reina'),    (7, 'La Florida'),    (8, 'Maipú'),    (9, 'Lo Barnechea'),    (10, 'Macul'),    (11, 'San Miguel'),    (12, 'Peñalolén'),    (13, 'Puente Alto'),    (14, 'Recoleta'),    (15, 'Estación Central'),    (16, 'San Bernardo'),    (17, 'Independencia'),    (18, 'La Cisterna'),    (19, 'Quilicura'),    (20, 'Quinta Normal'),    (21, 'Conchalí'),    (22, 'San Joaquín'),    (23, 'Huechuraba'),    (24, 'El Bosque'),    (25, 'Cerrillos'),    (26, 'Cerro Navia'),    (27, 'La Granja'),    (28, 'La Pintana'),    (29, 'Lo Espejo'),    (30, 'Lo Prado'),    (31, 'Pedro Aguirre Cerda'),    (32, 'Pudahuel'),    (33, 'Renca'),    (34, 'San Ramón'),    (35, 'Melipilla'),    (36, 'San Pedro'),    (37, 'Alhué'),    (38, 'María Pinto'),    (39, 'Curacaví'),    (40, 'Talagante'),    (41, 'El Monte'),    (42, 'Paine'),    (43, 'Peñaflor'),    (44, 'Isla de Maipo'),    (45, 'Colina'),    (46, 'Pirque')]

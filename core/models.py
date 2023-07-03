@@ -34,14 +34,11 @@ class Cliente(models.Model):
     celular_cli = models.CharField(max_length=12)
     contrasena_cli = models.CharField(max_length=6)
     estado_suscripcion_cli = models.CharField(max_length=1, default='I')
-    id_com = models.ForeignKey('Comuna', on_delete=models.CASCADE, db_column='ID_COM')
-    
-
-    def __str__(self):
-        return self.nombre_cli
+    comuna_cli = models.CharField(max_length=100)
 
     class Meta:
         db_table = 'CLIENTE'
+
 
 class CorredoraPropiedad(models.Model):
     rut_corr = models.CharField(max_length=8, primary_key=True)
