@@ -28,58 +28,57 @@ def home(request):
 
 
 def page_casas(request):
-    casas = Inmueble.objects.filter(id_tipo_inmb=1)  # Filtrar las casas (id_tipo_inmb=1)
-
+    casas = Inmueble.objects.filter(tipo_inmueble="Casa")
+    
     context = {
         'casas': casas
     }
 
-    for casa in casas:
-        fotos = FotoInmueble.objects.filter(id_inmb=casa.id_inmb)
-        casa.fotos = fotos
+    
 
     return render(request, 'core/pageCasa.html', context)
 
 
-
 def detalle_casa(request, inmueble_id):
-    # Obtener el inmueble
-    inmueble = Inmueble.objects.get(id_inmb=inmueble_id)
+    try:
+        # Obtener el inmueble por su ID
+        inmueble = Inmueble.objects.get(id_inmb=inmueble_id)
 
-    # Verificar si el inmueble es una casa (tipo_inmb = 1)
-    if inmueble.id_tipo_inmb.id_tipo_inmb == 1:
-        # Resto del código para obtener los datos del propietario y el estado del inmueble
-        
-        # Obtener el propietario
-        propietario = inmueble.rut_cli
-        
-        # Obtener el estado del inmueble
-        estado = inmueble.cod_estado_inmb
+        # Verificar si el inmueble es una casa (tipo_inmb = 1)
+        if inmueble.tipo_inmueble == "Casa":
+            # Resto del código para obtener los datos del propietario y el estado del inmueble
 
-        # Obtener comuna 
-        comuna = inmueble.id_com
+            # Obtener el propietario
+            propietario = inmueble.rut_cli
 
+            # Obtener el estado del inmueble
+            estado = inmueble.estado_inmueble
 
+            # Obtener comuna
+            comuna = inmueble.comuna_inmb
 
-        # Renderizar el template con los datos
-        return render(request, 'detalleCasa.html', {
-            'casa': inmueble,
-            'propietario': propietario,
-            'estado': estado,
-            'comuna': comuna,
-        })
-    else:
-        # Si el inmueble no es una casa, puedes mostrar un mensaje de error o redirigir a otra página
-        return HttpResponse("El inmueble no es una casa")
+            # Renderizar el template con los datos
+            return render(request, 'detalleCasa.html', {
+                'casa': inmueble,
+                'propietario': propietario,
+                'estado': estado,
+                'comuna': comuna,
+            })
+        else:
+            # Si el inmueble no es una casa, puedes mostrar un mensaje de error o redirigir a otra página
+            return HttpResponse("El inmueble no es una casa")
+    except Inmueble.DoesNotExist:
+        # Si el inmueble no existe, puedes mostrar un mensaje de error o redirigir a otra página
+        return HttpResponse("El inmueble no existe")
 
 
 #Acá está lo relacionado a deptos
 
 def page_deptos(request):
-    deptos = Inmueble.objects.filter(id_tipo_inmb=2)  # Filtrar los deptos (id_tipo_inmb=2)
+    departamentos = Inmueble.objects.filter(tipo_inmueble="Departamento")
 
     context = {
-        'deptos': deptos
+        'deptos': departamentos
     }
 
 
@@ -87,32 +86,36 @@ def page_deptos(request):
 
 
 def detalle_depto(request, inmueble_id):
-    # Obtener el inmueble
-    inmueble = Inmueble.objects.get(id_inmb=inmueble_id)
 
-    # Verificar si el inmueble es un depto (tipo_inmb = 2)
-    if inmueble.id_tipo_inmb.id_tipo_inmb == 2:
-        # Resto del código para obtener los datos del propietario y el estado del inmueble
-        
-        # Obtener el propietario
-        propietario = inmueble.rut_cli
-        
-        # Obtener el estado del inmueble
-        estado = inmueble.cod_estado_inmb
+    try: 
+        inmueble = Inmueble.objects.get(id_inmb=inmueble_id)
+    
+    
+        if inmueble.tipo_inmueble == "Departamento":
+            # Resto del código para obtener los datos del propietario y el estado del inmueble
+            
+            # Obtener el propietario
+            propietario = inmueble.rut_cli
+            
+            # Obtener el estado del inmueble
+            estado = inmueble.estado_inmueble
 
-        # Obtener comuna 
-        comuna = inmueble.id_com
+            # Obtener comuna 
+            comuna = inmueble.comuna_inmb
 
-        # Renderizar el template con los datos
-        return render(request, 'detalleDepartamento.html', {
-            'depto': inmueble,
-            'propietario': propietario,
-            'estado': estado,
-            'comuna': comuna,
-        })
-    else:
-        # Si el inmueble no es una casa, puedes mostrar un mensaje de error o redirigir a otra página
-        return HttpResponse("El inmueble no es un departamento")
+            # Renderizar el template con los datos
+            return render(request, 'detalleDepartamento.html', {
+                'depto': inmueble,
+                'propietario': propietario,
+                'estado': estado,
+                'comuna': comuna,
+            })
+        else:
+            # Si el inmueble no es una casa, puedes mostrar un mensaje de error o redirigir a otra página
+            return HttpResponse("El inmueble no es una casa")
+    except Inmueble.DoesNotExist:
+        # Si el inmueble no existe, puedes mostrar un mensaje de error o redirigir a otra página
+        return HttpResponse("El inmueble no existe")
 
 
 

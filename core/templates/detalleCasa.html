@@ -66,7 +66,6 @@
           <div class="card">
             <h5 class="card-header">{{casa.desc_inmb}}</h5>
             <div class="card-body">
-              <h5 class="card-title">{{comuna.nom_com}}</h5>
               <p class="card-text"> <h3>${{casa.precio_inmb}}</h3>
                 {{casa.dir_inmb}} <br>
                 CANTIDAD DE DORMITORIOS: {{casa.dormitorio_inmb}}<br> 
@@ -105,15 +104,7 @@
             <tr>
                 <th>Estado</th>
                 <td>
-                {% if estado|lower == "l" %}
-                    Libre
-                {% elif estado|lower == "v" %}
-                    Vendido
-                {% elif estado|lower == "a" %}
-                    Arrendado
-                {% else %}
-                    Desconocido
-                {% endif %}
+                    {{estado}}
                 </td>
             </tr>
             <tr>
@@ -138,7 +129,7 @@
 </div>
 <div class="container">
     <h5>Datos de Contacto</h5>
-    <p>Nombre: {{propietario}}  {{ propietario.apat_cli }}</p><br>
+    <p>Nombre: {{propietario.nombre_cli}}  {{ propietario.apat_cli }}</p>
     <p>Celular: {{propietario.celular_cli}}</p> 
     <p>Correo: {{propietario.email_cli}}</p>
 
