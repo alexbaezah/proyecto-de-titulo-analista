@@ -1,5 +1,5 @@
 from django.urls import path
-from core.views import home, page_casas, detalle_casa, page_deptos, detalle_depto, registro_usuario, login_view
+from core.views import home, page_casas, detalle_casa, page_deptos, detalle_depto, registro_usuario, login_view, mi_perfil
 from django.shortcuts import render
 from django.conf import settings 
 from django.conf.urls.static import static
@@ -20,7 +20,7 @@ urlpatterns = [
     path('detalleDepartamento/<int:inmueble_id>/', detalle_depto, name='detalle_depto'),
 
     path('login/', login_view, name='login'),
-
+    path('perfil/', mi_perfil, name='mi_perfil'),
 
     
    

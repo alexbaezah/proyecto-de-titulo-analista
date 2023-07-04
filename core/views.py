@@ -191,3 +191,13 @@ def login_view(request):
             return render(request, 'core/login.html')
     else:
         return render(request, 'core/login.html')
+
+def mi_perfil(request):
+    # Obtener el email del usuario actualmente autenticado
+    email = request.session.get('session_email')
+    
+    # Obtener el objeto Cliente correspondiente al email
+    cliente = Cliente.objects.get(email_cli=email)
+    
+    # Renderizar la plantilla 'perfil.html' con los datos del cliente
+    return render(request, 'core/mi_perfil.html', {'cliente': cliente})
