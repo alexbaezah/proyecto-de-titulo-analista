@@ -1,5 +1,5 @@
 from django.urls import path
-from core.views import home, page_casas, detalle_casa, page_deptos, detalle_depto, registro_usuario, login_view, mi_perfil
+from core.views import home, page_casas, detalle_casa, page_deptos, detalle_depto, registro_usuario, login_view, mi_perfil, crear_inmueble
 from django.shortcuts import render
 from django.conf import settings 
 from django.conf.urls.static import static
@@ -22,7 +22,7 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('perfil/', mi_perfil, name='mi_perfil'),
 
-    
+    path('crear_inmueble/', crear_inmueble, name='crear_inmueble'),
    
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
