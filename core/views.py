@@ -144,7 +144,10 @@ def registro_usuario(request):
         cliente.save()
 
         # Redireccionar a una página de éxito o a donde desees después del registro
-        return redirect('registro_exitoso')
+        context = {
+            'registro_exitoso': "Cliente registrado con éxito"
+        }
+        return render(request, 'core/registro.html', context)
     else:
         comunas = [    (1, 'Las Condes'),    (2, 'Providencia'),    (3, 'Santiago'),    (4, 'Ñuñoa'),    (5, 'Vitacura'),    (6, 'La Reina'),    (7, 'La Florida'),    (8, 'Maipú'),    (9, 'Lo Barnechea'),    (10, 'Macul'),    (11, 'San Miguel'),    (12, 'Peñalolén'),    (13, 'Puente Alto'),    (14, 'Recoleta'),    (15, 'Estación Central'),    (16, 'San Bernardo'),    (17, 'Independencia'),    (18, 'La Cisterna'),    (19, 'Quilicura'),    (20, 'Quinta Normal'),    (21, 'Conchalí'),    (22, 'San Joaquín'),    (23, 'Huechuraba'),    (24, 'El Bosque'),    (25, 'Cerrillos'),    (26, 'Cerro Navia'),    (27, 'La Granja'),    (28, 'La Pintana'),    (29, 'Lo Espejo'),    (30, 'Lo Prado'),    (31, 'Pedro Aguirre Cerda'),    (32, 'Pudahuel'),    (33, 'Renca'),    (34, 'San Ramón'),    (35, 'Melipilla'),    (36, 'San Pedro'),    (37, 'Alhué'),    (38, 'María Pinto'),    (39, 'Curacaví'),    (40, 'Talagante'),    (41, 'El Monte'),    (42, 'Paine'),    (43, 'Peñaflor'),    (44, 'Isla de Maipo'),    (45, 'Colina'),    (46, 'Pirque')]
 
@@ -187,14 +190,18 @@ def crear_inmueble(request):
                     estado_inmueble=estado_inmueble)
         
         inmueble.save()
-        return redirect('registro_exitoso')
+
+        context = {
+            'registro_exitoso': "Inmueble creado con éxito"
+        }
+        return render(request, 'core/crear_inmueble.html', context)
         
     else:
         comunas = [    (1, 'Las Condes'),    (2, 'Providencia'),    (3, 'Santiago'),    (4, 'Ñuñoa'),    (5, 'Vitacura'),    (6, 'La Reina'),    (7, 'La Florida'),    (8, 'Maipú'),    (9, 'Lo Barnechea'),    (10, 'Macul'),    (11, 'San Miguel'),    (12, 'Peñalolén'),    (13, 'Puente Alto'),    (14, 'Recoleta'),    (15, 'Estación Central'),    (16, 'San Bernardo'),    (17, 'Independencia'),    (18, 'La Cisterna'),    (19, 'Quilicura'),    (20, 'Quinta Normal'),    (21, 'Conchalí'),    (22, 'San Joaquín'),    (23, 'Huechuraba'),    (24, 'El Bosque'),    (25, 'Cerrillos'),    (26, 'Cerro Navia'),    (27, 'La Granja'),    (28, 'La Pintana'),    (29, 'Lo Espejo'),    (30, 'Lo Prado'),    (31, 'Pedro Aguirre Cerda'),    (32, 'Pudahuel'),    (33, 'Renca'),    (34, 'San Ramón'),    (35, 'Melipilla'),    (36, 'San Pedro'),    (37, 'Alhué'),    (38, 'María Pinto'),    (39, 'Curacaví'),    (40, 'Talagante'),    (41, 'El Monte'),    (42, 'Paine'),    (43, 'Peñaflor'),    (44, 'Isla de Maipo'),    (45, 'Colina'),    (46, 'Pirque')]
         ciudades = [(1, 'Santiago'), (2, 'Valparaíso')]
         regiones = [(1, 'Metropolitana'), (2, 'Valparaíso')]
         tipos = [(1, 'Casa'), (2, 'Departamento')]
-        estados = [(1, 'Libre'), (2, 'Arrendada'), (3, 'Vendida')]
+        estados = [(1, 'Libre')]
 
         # Si el método es GET, renderiza el formulario vacío
     return render(request, 'core/crear_inmueble.html', {'comunas': comunas, 'ciudades': ciudades, 'regiones': regiones, 'tipos': tipos, 'estados': estados})
